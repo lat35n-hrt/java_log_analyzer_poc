@@ -3,7 +3,21 @@
 import re
 from datetime import datetime
 
-LOG_PATTERN = re.compile(r"(?P<timestamp>\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}).*(?P<level>INFO|WARN|ERROR)\s*-\s*(?P<message>.*)")
+
+# Example log lines:
+# 2025-11-06 10:21:17 ERROR com.example.Controller - Failed to handle request...
+# 2025-11-06 10:25:42,312 [main] INFO  org.springframework... - Starting MyApp
+# 2025-11-06T10:32:45.101 INFO com.example.Service - Health check passed
+LOG_PATTERN = re.compile(
+    r"""^\s*
+    (?P<timestamp>\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2}(?:[.,]\d{3})?)  # 2000-01-01 12:34:56[,123]
+    .*?                                                                  # Skip thread names and extra columns non-greedily
+    (?P<level>INFO|WARN|ERROR)                                           # Log level
+    \s+.*?-\s+                                                           # Logger name etc. → " - " → Message
+    (?P<message>.*)                                                      # Message body
+    $""",
+    re.VERBOSE,
+)
 
 def parse_log_line(line):
     match = LOG_PATTERN.search(line)

@@ -1,0 +1,12 @@
+# sample.log
+# Example Java application log for parser testing.
+# This file is included to allow recruiters or reviewers
+# to reproduce the PoC behavior of `parser.py`.
+# The contents may be updated periodically to reflect real-world patterns.
+
+
+2025-11-06 10:21:15 INFO  com.example.MainApp - Application started successfully
+2025-11-06 10:21:16 WARN  com.example.DataService - Slow query detected for user_id=123
+2025-11-06 10:21:17 ERROR com.example.Controller - Failed to handle request: NullPointerException
+2025-11-06 10:21:18 INFO  com.example.Service - Retrying connection to database
+2025-11-06 10:21:19 ERROR com.example.Database - Database connection failed: timeout after 5000ms

@@ -25,3 +25,11 @@ Code updates planned over the weekend (e.g., parser.py and sample logs).
 
 ## 💡 Context
 Created as part of ongoing learning for L2 technical support and QA automation roles (Rakuten Travel use case).
+
+
+## Output example
+Analyzed 5 log lines.
+Total ERROR entries: 2
+
+2025-11-06 10:21:17 - Failed to handle request: NullPointerException
+2025-11-06 10:21:19 - Database connection failed: timeout after 5000ms

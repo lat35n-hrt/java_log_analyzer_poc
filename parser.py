@@ -11,7 +11,7 @@ Usage:
     python3 parser.py
 """
 
-
+import os
 import re
 from datetime import datetime
 
@@ -33,19 +33,29 @@ LOG_PATTERN = re.compile(
 
 def parse_log_line(line):
     match = LOG_PATTERN.search(line)
+
     if match:
         return {
             "timestamp": match.group("timestamp"),
             "level": match.group("level"),
             "message": match.group("message"),
         }
+
     return None
 
 def analyze_log(file_path):
+    if not os.path.exists(file_path):
+        print(f"[Error] Log file not found: {file_path}")
+        return
+
     with open(file_path, "r") as f:
         entries = [parse_log_line(line) for line in f]
     errors = [e for e in entries if e and e["level"] == "ERROR"]
-    print(f"Total ERROR entries: {len(errors)}")
+
+    total = sum(1 for e in entries if e)
+    print(f"Analyzed {total} log lines.")
+    print(f"Total ERROR entries: {len(errors)}\n")
+
     for e in errors[:5]:  # Show top 5 for brevity
         print(f"{e['timestamp']} - {e['message']}")
 

@@ -1,5 +1,17 @@
 # parser.py
 
+"""
+parser.py — Java Log Analyzer PoC
+
+Parses Java-style log files (Log4j / SLF4J / Spring Boot) and extracts
+timestamp, log level, and message. Designed for quick verification by reviewers
+or recruiters within a reproducible environment.
+
+Usage:
+    python3 parser.py
+"""
+
+
 import re
 from datetime import datetime
 
